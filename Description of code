@@ -1,0 +1,116 @@
+This C program implements a Library Management System that allows the user to manage books and track issued books using a text-based menu. It uses file handling to store book and student data in binary files (books.txt and issue.txt).
+
+The application supports the following functionalities:
+
+Add a new book to the library.
+
+View the list of available books.
+
+Remove a book from the system.
+
+Issue a book to a student.
+
+View the list of all issued books.
+
+All data is stored in binary format using structures and persists across program runs.
+
+🔧 Functions and Their Purpose
+main()
+Displays the menu in an infinite loop.
+
+Takes user input to perform an operation.
+
+Calls the corresponding function based on user choice.
+
+Uses system("cls") to clear the screen (works only on Windows).
+
+Uses getch() (from conio.h, though it's not included in your code — should be added) to pause before the next iteration.
+
+addBook()
+Purpose: Adds a new book record to books.txt.
+
+Takes input: Book ID, Book Name, Author Name.
+
+Automatically adds the current date.
+
+Stores the data in binary format using fwrite().
+
+Key Files Used: books.txt (append binary mode "ab")
+
+booksList()
+Purpose: Displays all the books currently in the library.
+
+Opens books.txt in read binary mode.
+
+Reads each book record using fread() and displays it in a formatted table.
+
+Key Files Used: books.txt (read binary mode "rb")
+
+del()
+Purpose: Deletes a book record by its ID.
+
+Asks user for a book ID.
+
+Copies all records except the one with the matching ID to a temporary file.
+
+Replaces the original file with the temp file (basic file update technique).
+
+Key Files Used: books.txt, temp.txt
+
+issueBook()
+Purpose: Issues a book to a student.
+
+Prompts for Book ID and checks if the book exists in books.txt.
+
+If found, prompts for student name, class, and roll number.
+
+Adds the issue entry along with the current date to issue.txt.
+
+Key Files Used:
+
+Reads: books.txt
+
+Writes: issue.txt (append binary mode "ab")
+
+issueList()
+Purpose: Shows a list of all issued books.
+
+Reads issue.txt in binary mode.
+
+Displays each record (student info + book issued + issue date) in a formatted table.
+
+Key Files Used: issue.txt (read binary mode "rb")
+
+📁 Files Used
+File	Purpose
+books.txt	Stores all book records
+issue.txt	Stores all issued book records
+temp.txt	Temporary file used during deletion
+
+📦 Data Structures Used
+struct books
+Stores details about each book.
+
+c
+Copy
+Edit
+struct books {
+    int id;
+    char bookName[50];
+    char authorName[50];
+    char date[12];
+};
+struct student
+Stores details about a student and the book issued to them.
+
+c
+Copy
+Edit
+struct student {
+    int id;
+    char sName[50];
+    char sClass[50];
+    int sRoll;
+    char bookName[50];
+    char date[12];
+};
